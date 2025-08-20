@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alma — Copy & Open</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color:#111827; }
+    .card { max-width: 740px; padding: 16px; border: 1px solid #e5e7eb; border-radius: 14px; background: #fafafa; }
+    .btn { display:inline-block; padding:10px 14px; border-radius:10px; border:1px solid #111827; background:#111827; color:#fff; text-decoration:none; font-weight:700; cursor:pointer; }
+    .btn.secondary { background:#fff; color:#111827; }
+    #status { color:#475569; font-size: 14px; margin-top: 10px; }
+    textarea { width:100%; min-height: 90px; border:1px solid #e5e7eb; border-radius: 10px; padding:10px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Alma — Copy & Open</h1>
+    <p>This page tries to <strong>copy your greeting</strong> to the clipboard and then opens the official Alma Adams form <em>without</em> ZIP parameters.</p>
+    <p><small>If auto‑copy is blocked by your browser, use the manual buttons below.</small></p>
+
+    <div id="status">Preparing…</div>
+
+    <div id="manual" style="display:none; margin-top:10px;">
+      <textarea id="ta" readonly>Hi,</textarea>
+      <div style="margin-top:8px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn" id="copyBtn">Copy</button>
+        <a class="btn secondary" id="openBtn" href="https://adamsforms.house.gov/forms/writeyourrep/" rel="noopener">Open Alma Form</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const almaURL = "https://adamsforms.house.gov/forms/writeyourrep/"; // no zip params
+    const qs = new URLSearchParams(location.search);
+    const msg = qs.get('msg') || "Hi,";
+    const status = (t) => { document.getElementById('status').textContent = t; };
+
+    async function tryCopy(text) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch (e) {}
+      try {
+        const ta = document.getElementById('ta');
+        ta.value = text;
+        ta.focus();
+        ta.select();
+        const ok = document.execCommand('copy');
+        return !!ok;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function run() {
+      // Put the message in the textarea for fallback
+      document.getElementById('ta').value = msg;
+
+      const copied = await tryCopy(msg);
+      if (copied) {
+        status("Greeting copied. Redirecting…");
+        setTimeout(() => { location.href = almaURL; }, 250);
+      } else {
+        status("Auto‑copy blocked. Tap Copy, then Open Alma Form.");
+        document.getElementById('manual').style.display = 'block';
+      }
+    }
+
+    document.getElementById('copyBtn').onclick = async () => {
+      const ok = await tryCopy(msg);
+      status(ok ? "Copied. Now tap Open Alma Form." : "Copy failed. Long‑press to select and copy.");
+    };
+
+    window.addEventListener('load', run, { once: true });
+  </script>
+</body>
+</html>
