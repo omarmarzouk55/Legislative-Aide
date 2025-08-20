@@ -23,7 +23,15 @@
     <div id="status">Preparing…</div>
 
     <div id="manual" style="display:none; margin-top:10px;">
-      <textarea id="ta" readonly>Hi,</textarea>
+      <textarea id="ta" readonly>Dear Representative,
+I am writing to strongly urge you to co-sponsor HR 2356 and to encourage your Democrat and Republican colleagues to do the same.
+As you know, Israel and its well-funded lobbying networks continue to push legislation that undermines our most fundamental rights, including the right to free speech and peaceful assembly. This includes efforts to criminalize or chill boycotts of Israeli companies and to dangerously redefine “antisemitism” to include legitimate criticism of a foreign government. This is particularly alarming given Israel’s ongoing atrocities in Gaza—atrocities made possible through U.S. weapons, intelligence, and political cover.
+HR 2356 is a commonsense measure. The public has a right to know whether elected officials hold dual citizenship—especially with countries that receive billions in U.S. taxpayer dollars and wield disproportionate influence over our foreign and domestic policy. A simple walk through the halls of Congress reveals foreign flags, particularly Israel’s, hanging outside the offices of both Republicans and Democrats. That reality underscores the urgent need for transparency.
+If anything, this bill should be expanded beyond Members of Congress to include senior federal officials such as cabinet members, department heads, and U.S. attorneys. Disclosure should also cover whether individuals have served in the military of a foreign state, whether active, reserve, or operational.
+The American people deserve to know who their leaders are accountable to. Silence or neutrality in this moment only enables the erosion of our democratic rights and deepens U.S. complicity in war crimes abroad.
+For these reasons, I strongly urge you to co-sponsor and vocally support HR 2356. Doing so would demonstrate a commitment to transparency, accountability, and the constitutional rights of the people you represent.
+Thank you for your leadership and service.
+</textarea>
       <div style="margin-top:8px; display:flex; gap:10px; flex-wrap:wrap;">
         <button class="btn" id="copyBtn">Copy</button>
         <a class="btn secondary" id="openBtn" href="https://adamsforms.house.gov/forms/writeyourrep/" rel="noopener">Open Alma Form</a>
@@ -34,7 +42,15 @@
   <script>
     const almaURL = "https://adamsforms.house.gov/forms/writeyourrep/"; // no zip params
     const qs = new URLSearchParams(location.search);
-    const msg = qs.get('msg') || "Hi,";
+    const msg = qs.get('msg') || "Dear Representative,
+I am writing to strongly urge you to co-sponsor HR 2356 and to encourage your Democrat and Republican colleagues to do the same.
+As you know, Israel and its well-funded lobbying networks continue to push legislation that undermines our most fundamental rights, including the right to free speech and peaceful assembly. This includes efforts to criminalize or chill boycotts of Israeli companies and to dangerously redefine “antisemitism” to include legitimate criticism of a foreign government. This is particularly alarming given Israel’s ongoing atrocities in Gaza—atrocities made possible through U.S. weapons, intelligence, and political cover.
+HR 2356 is a commonsense measure. The public has a right to know whether elected officials hold dual citizenship—especially with countries that receive billions in U.S. taxpayer dollars and wield disproportionate influence over our foreign and domestic policy. A simple walk through the halls of Congress reveals foreign flags, particularly Israel’s, hanging outside the offices of both Republicans and Democrats. That reality underscores the urgent need for transparency.
+If anything, this bill should be expanded beyond Members of Congress to include senior federal officials such as cabinet members, department heads, and U.S. attorneys. Disclosure should also cover whether individuals have served in the military of a foreign state, whether active, reserve, or operational.
+The American people deserve to know who their leaders are accountable to. Silence or neutrality in this moment only enables the erosion of our democratic rights and deepens U.S. complicity in war crimes abroad.
+For these reasons, I strongly urge you to co-sponsor and vocally support HR 2356. Doing so would demonstrate a commitment to transparency, accountability, and the constitutional rights of the people you represent.
+Thank you for your leadership and service.
+";
     const status = (t) => { document.getElementById('status').textContent = t; };
 
     async function tryCopy(text) {
